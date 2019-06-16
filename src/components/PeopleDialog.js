@@ -12,23 +12,29 @@ import {
   Button
 } from "@material-ui/core";
 
-const DialogCount = ({ email, onClose, charCounter, open }) => {
+const PeopleDialog = ({ email, onClose, data, open }) => {
+  const element = data[0];
+  const keys = element ? Object.keys(element) : [];
   return (
     <Dialog maxWidth="sm" fullWidth onClose={onClose} open={open}>
-      <DialogTitle id="simple-dialog-title">{email}</DialogTitle>
+      <DialogTitle id="simple-dialog-title">{email || ""}</DialogTitle>
       <DialogContent>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Character</TableCell>
-              <TableCell>Count</TableCell>
+              {keys.map(key => (
+                <TableCell key={key}>{key}</TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {charCounter.map(({ key, count }) => (
-              <TableRow key={key}>
-                <TableCell>{key}</TableCell>
-                <TableCell>{count}</TableCell>
+            {data.map((row, i) => (
+              <TableRow key={`data--row--${i}`}>
+                {keys.map(key => (
+                  <TableCell key={`data--row--${i}--${key}`}>
+                    {row[key]}
+                  </TableCell>
+                ))}
               </TableRow>
             ))}
           </TableBody>
@@ -43,4 +49,4 @@ const DialogCount = ({ email, onClose, charCounter, open }) => {
   );
 };
 
-export default DialogCount;
+export default PeopleDialog;
