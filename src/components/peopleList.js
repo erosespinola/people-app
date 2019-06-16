@@ -1,30 +1,22 @@
 import React, { Fragment } from "react";
-import {
-  List,
-  ListItem,
-  Divider,
-  ListItemText,
-  ListItemAvatar,
-  Avatar
-} from "@material-ui/core";
+import PeopleItem from "./PeopleItem";
+import { List, Divider } from "@material-ui/core";
 
-const PeopleList = ({ people }) => (
-  <List>
-    {people.map(({ email, name, title }) => (
-      <Fragment key={email}>
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar
-              alt={`avatar-${email}`}
-              src={`https://api.adorable.io/avatars/40/${email}`}
-            />
-          </ListItemAvatar>
-          <ListItemText primary={`${name} (${email})`} secondary={title} />
-        </ListItem>
-        <Divider />
-      </Fragment>
-    ))}
-  </List>
-);
+const PeopleList = ({ people, onCharCount, onDuplicate }) => {
+  return (
+    <List>
+      {people.map(person => (
+        <Fragment key={person.email}>
+          <PeopleItem
+            person={person}
+            onCharCount={onCharCount}
+            onDuplicate={onDuplicate}
+          />
+          <Divider />
+        </Fragment>
+      ))}
+    </List>
+  );
+};
 
 export default PeopleList;
