@@ -8,11 +8,13 @@ class App extends React.Component {
     this.state = {
       people: [],
       count: [],
+      repeated: [],
       email: null
     };
 
     this.onCharCount = this.onCharCount.bind(this);
-    this.onCloseCount = this.onCloseCount.bind(this);
+    this.onDuplicate = this.onDuplicate.bind(this);
+    this.onCloseModal = this.onCloseModal.bind(this);
   }
 
   componentDidMount() {
@@ -27,19 +29,27 @@ class App extends React.Component {
       .then(({ data }) => this.setState({ count: data, email }));
   }
 
-  onCloseCount() {
-    this.setState({ count: [] });
+  onDuplicate(email) {
+    console.log(email);
+  }
+
+  onCloseModal() {
+    this.setState({ count: [], repeated: [] });
   }
 
   render() {
     const { people, email, count } = this.state;
     return (
       <Fragment>
-        <PeopleList people={people} onCharCount={this.onCharCount} />
+        <PeopleList
+          people={people}
+          onCharCount={this.onCharCount}
+          onDuplicate={this.onDuplicate}
+        />
         <DialogCount
           open={count.length > 0}
           email={email}
-          onClose={this.onCloseCount}
+          onClose={this.onCloseModal}
           charCounter={count}
         />
       </Fragment>
