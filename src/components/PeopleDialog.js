@@ -17,8 +17,8 @@ const PeopleDialog = ({ email, onClose, data, open }) => {
   const keys = element ? Object.keys(element) : [];
   return (
     <Dialog maxWidth="sm" fullWidth onClose={onClose} open={open}>
-      <DialogTitle id="simple-dialog-title">{email || ""}</DialogTitle>
-      <DialogContent>
+      <DialogTitle id="dialog-title">{email || ""}</DialogTitle>
+      <DialogContent id="dialog-content">
         <Table>
           <TableHead>
             <TableRow>
@@ -40,7 +40,7 @@ const PeopleDialog = ({ email, onClose, data, open }) => {
           </TableBody>
         </Table>
       </DialogContent>
-      <DialogActions>
+      <DialogActions id="dialog-actions">
         <Button onClick={onClose} color="primary">
           Close
         </Button>
